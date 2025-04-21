@@ -50,7 +50,7 @@ export default function SearchBar({
         </div>
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 transition-colors disabled:opacity-50"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 transition-colors cursor-pointer disabled:opacity-50"
           disabled={disabled || !query.trim()}
           aria-label="Submit search"
         >

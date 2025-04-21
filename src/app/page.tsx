@@ -7,6 +7,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import BookErrorMessage from "@/components/BookErrorMessage";
 import BookList from "@/components/BookList";
 import SearchBar from "../components/SearchBar";
+import Pagination from "@/components/Pagination";
 
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -35,6 +36,14 @@ export default function Home() {
     }
   };
 
+  const handlePageChange = (page: number) => {
+    if (books.length > 0) {
+      // Only search if we have an existing query
+      handleSearch(books[0].title, page); // Using the first book's title as query
+      // Note: You might want to store the last search query separately
+    }
+  };
+
   return (
     <main className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-4xl mx-auto">
@@ -53,6 +62,15 @@ export default function Home() {
 
         <BookList books={books} loading={loading} />
       </div>
+
+      {books.length > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalResults={totalResults}
+          resultsPerPage={resultsPerPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </main>
   );
 }
